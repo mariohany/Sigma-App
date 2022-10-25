@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "463642162679",
+    "project_id": "sigma-platform-4547a",
+    "storage_bucket": "sigma-platform-4547a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463642162679:android:9cd4cdb3e4dc4aabf86af2",
+        "android_client_info": {
+          "package_name": "com.smart.sigma.new"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463642162679-3g24rvj0evrb28ubvucotgmjm20qdlui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smart.sigma.new",
+            "certificate_hash": "7c7a7b88483be259ffecec4c35a83d9e80e6ef05"
+          }
+        },
+        {
+          "client_id": "463642162679-rfb079ci7ce2k4du0vblm2og36n2oec0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClUkd3Couzacp-l5L3V1WKyuT6YVbRAzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463642162679-rfb079ci7ce2k4du0vblm2og36n2oec0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "463642162679-ca3n4j5q1n6f9pd5gsrilokvic076n0o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "Edu.SigmaApp.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

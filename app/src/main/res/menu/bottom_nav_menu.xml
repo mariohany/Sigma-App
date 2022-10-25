@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home_icon"
+        android:title="@string/main" />
+    <item
+        android:id="@+id/courses"
+        android:icon="@drawable/ic_courses_icon"
+        android:title="@string/course" />
+    <item
+        android:id="@+id/library"
+        android:icon="@drawable/ic_library_icon"
+        android:title="@string/library" />
+    <item
+        android:id="@+id/more"
+        android:icon="@drawable/ic_more_icon"
+        android:title="@string/more" />
+
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/ic_statistics"
+        android:visible="false"
+        android:title="@string/statistics" />
+
+
+</menu>

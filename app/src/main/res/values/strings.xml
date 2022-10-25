@@ -1,0 +1,162 @@
+<resources>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="fcm_message">New Course added</string>
+    <string name="app_name">Sigma</string>
+    <string name="app_no_internet_msg">Internet connection is required!</string>
+    <string name="refresh_button">Refresh Button</string>
+    <string name="welcome_msg">welcome to sigma app</string>
+    <string name="mobile_number">Mobile Number </string>
+    <string name="password"> Password</string>
+    <string name="forget_password"> Forget Password?</string>
+    <string name="login">Login </string>
+    <string name="have_not_account"> Have Not Account?</string>
+    <string name="create_new_account"> Create New Account</string>
+    <string name="visitor">Visitor </string>
+    <string name="have_account">Have Account? </string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="Continue">Continue</string>
+    <string name="requried_field">This Field Is Required</string>
+    <string name="invalid_mobile_number">Invalid Mobile Number</string>
+    <string name="invalid_password">Invalid Password</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="welcome">Welcome To You</string>
+    <string name="your_account_created_successfully">Your Account Created Successfully</string>
+    <string name="verify_otp">Please Enter OTP Code Received On Mobile</string>
+    <string name="change_number">Change Number</string>
+    <string name="confirm">Confirm</string>
+    <string name="not_receive_otp_code">Not Receive OTP Code?</string>
+    <string name="resend">Resend</string>
+    <string name="educational_level">Please Enter Your Educational Level</string>
+    <string name="basic_level">Basic Level</string>
+    <string name="university_level">University Level</string>
+    <string name="university_information">University Information</string>
+    <string name="continue_university_information">Please Continue Your University Information</string>
+    <string name="collage">Collage</string>
+    <string name="term">Term</string>
+    <string name="year">Year</string>
+    <string name="department">Department</string>
+    <string name="save">Save</string>
+    <string name="enter_mobile_number">Please Enter Your Mobile Number Used To Register</string>
+    <string name="to_retrieve_your_password"> To Retrieve Your Password</string>
+    <string name="enter_new_password">Please Enter Your New Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="main">Main</string>
+    <string name="course">My Courses</string>
+    <string name="library">Library</string>
+    <string name="more">More</string>
+    <string name="favourite_lecture">Favourite Lecture</string>
+    <string name="notification">Notification</string>
+    <string name="previous_exams">Previous Exams</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="setting">Setting</string>
+    <string name="change_language">Change Language</string>
+    <string name="notification_setting">Notification Setting</string>
+    <string name="about_segma_app">About Sigma App</string>
+    <string name="log_out">Log Out</string>
+    <string name="lecture">Lectures</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="active_notification">Active Notification</string>
+    <string name="close_notification">Close Notification</string>
+    <string name="profile">Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="lectures">Lectures</string>
+    <string name="information">Information</string>
+    <string name="cancel">Cancel</string>
+    <string name="old_password">Old Password</string>
+    <string name="check_connection">Check your internet connection</string>
+    <string name="retry_connection">إعادة المحاولة</string>
+    <string name="about_segma_content">Sigma is an online education platform that is interested in presenting educational content in an easy and simple way for students, while providing all the required characteristics of displaying curricula and assessment exams to support distance education, especially in this period</string>
+    <string name="send_successfully">send successfully</string>
+    <string name="un_expected_error">UnExpected Error</string>
+    <string name="empty_cources">Sorry .. You are not participating in any course</string>
+    <string name="my_cources">My courses</string>
+    <string name="title_cources">Current courses that you have registered</string>
+    <string name="num_available_watch">Available watches</string>
+    <string name="num_watch">Current views</string>
+    <string name="watches">watch</string>
+    <string name="start_from">start from</string>
+    <string name="end_from">end in</string>
+    <string name="start_watch">Start Watch</string>
+    <string name="watch_letter">Watch later</string>
+    <string name="mintes">Minutes</string>
+    <string name="pound">L.E</string>
+    <string name="gener">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="call_service">call center</string>
+    <string name="call">call</string>
+    <string name="call_us">call Us</string>
+    <string name="ok">Ok</string>
+    <string name="block_title">Excuse me…. You can use the app on this device</string>
+    <string name="excced_watch">You do not have any views available for the lecture</string>
+    <string name="pay_first">Pay First</string>
+    <string name="about_course">About Course</string>
+    <string name="attached_files">Attached files</string>
+    <string name="whats_contact">Contact via WhatsApp</string>
+    <string name="empty_library">Sorry.. there are no files attached</string>
+    <string name="join_group">Join Group</string>
+    <string name="whatsApp">WhatsApp</string>
+    <string name="Facebook">FaceBook</string>
+    <string name="ratio">rate</string>
+    <string name="enrrol_first">You must participate in the course,open course from My Courses Tab</string>
+    <string name="ivalid_login">Invalid Username or password</string>
+
+    <string-array name="Collages">
+        <item>please select collage</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Python</item>
+        <item>Scala</item>
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Python</item>
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Python</item>
+        <item>Perl</item>
+    </string-array>
+    <string-array name="Term">
+        <item>please select term</item>
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+    </string-array>
+    <string-array name="Year">
+        <item>please select year</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="Department">
+        <item>please select department</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="update">Update</string>
+    <string name="statistics">Statistics</string>
+    <string name="online">online</string>
+    <string name="in_center">in center</string>
+    <string name="safety_net_api_key" translatable="false">AIzaSyA9b2exp1IUKZtmdqxYjqTDfiqfoHSkmK0</string>
+</resources>
