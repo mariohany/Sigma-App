@@ -11,4 +11,6 @@ data class StudentSessions(
     val expired: Boolean,
     val progress:Int,
     val videoPosition:Long,
+    @SerializedName("remaning_seconds")
+    val remainingSeconds: Long?
 ) : Serializable

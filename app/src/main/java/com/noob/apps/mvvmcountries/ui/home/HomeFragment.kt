@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.messaging.FirebaseMessaging
 import com.noob.apps.mvvmcountries.R
 import com.noob.apps.mvvmcountries.adapters.NewRecyclerViewClickListener
 import com.noob.apps.mvvmcountries.adapters.SectionAdapter
@@ -175,6 +176,13 @@ class HomeFragment : BaseFragment(),
                             .show(requireActivity().supportFragmentManager, BlockUserDialog.TAG)
 //                    if (fcmToken.isNotEmpty())
 //                        initFCMTokenObservers()
+                    FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            return@addOnCompleteListener
+                        }
+
+                        initFCMTokenObservers(task.result)
+                    }
                     if (kt.data.deviceId == null) {
 //                        addDeviceId()
                         logOut()
@@ -245,29 +253,29 @@ class HomeFragment : BaseFragment(),
         requireActivity().finishAffinity()
     }
 
-//    private fun initFCMTokenObservers() {
-//        courseViewModel.updateFCMToken(token, fcmToken)
-//        courseViewModel.fcmResponse.observeOnce(viewLifecycleOwner) { kt ->
-//
-//        }
-//        courseViewModel.mShowResponseError.observeOnce(viewLifecycleOwner) {
-//        }
-//        courseViewModel.mShowProgressBar.observe(viewLifecycleOwner) { bt ->
-//            if (bt) {
-//                showLoader()
-//            } else {
-//                hideLoader()
-//            }
-//
-//        }
-//        courseViewModel.mShowNetworkError.observeOnce(viewLifecycleOwner) {
-//            if (it != null) {
-//                ConnectionDialogFragment.newInstance(Constant.RETRY_LOGIN)
-//                    .show(requireActivity().supportFragmentManager, ConnectionDialogFragment.TAG)
-//            }
-//
-//        }
-//    }
+    private fun initFCMTokenObservers(fcm: String) {
+        courseViewModel.updateFCMToken(token, fcm)
+        courseViewModel.fcmResponse.observeOnce(viewLifecycleOwner) { kt ->
+
+        }
+        courseViewModel.mShowResponseError.observeOnce(viewLifecycleOwner) {
+        }
+        courseViewModel.mShowProgressBar.observe(viewLifecycleOwner) { bt ->
+            if (bt) {
+                showLoader()
+            } else {
+                hideLoader()
+            }
+
+        }
+        courseViewModel.mShowNetworkError.observeOnce(viewLifecycleOwner) {
+            if (it != null) {
+                ConnectionDialogFragment.newInstance(Constant.RETRY_LOGIN)
+                    .show(requireActivity().supportFragmentManager, ConnectionDialogFragment.TAG)
+            }
+
+        }
+    }
 
     private fun addDeviceId() {
         courseViewModel.addDeviceId(token, deviceId)

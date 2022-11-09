@@ -138,7 +138,7 @@ open class BaseActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         userPreferences = UserPreferences(this)
-        userPreferences.getAppLanguage.asLiveData().observeOnce(this, {
+        userPreferences.getAppLanguage.asLiveData().observeOnce(this) {
             val config = resources.configuration
             var lang = "ar"
             appLanguage = it
@@ -156,7 +156,7 @@ open class BaseActivity2 : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 createConfigurationContext(config)
             resources.updateConfiguration(config, resources.displayMetrics)
-        })
+        }
         mMediaRouter = MediaRouter.getInstance(this)
 
         val fm = supportFragmentManager
@@ -196,13 +196,14 @@ open class BaseActivity2 : AppCompatActivity() {
 
     }
 
-    protected fun isAppInstalled(uri: String): Boolean {
+    private fun isAppInstalled(uri: String): Boolean {
         val pm = packageManager
-        try {
+        return try {
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
-            return true
-        }catch (e:Exception){}
-        return false
+            true
+        }catch (e:Exception){
+            false
+        }
     }
 
 
@@ -377,10 +378,26 @@ open class BaseActivity2 : AppCompatActivity() {
         super.onResume()
         //  val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
         //   registerReceiver(bluetoothChangeReceiver, filter)
+        EmulatorDetector.with(this)
+            .setCheckTelephony(true)
+            .addPackageName("com.bluestacks")
+            .setDebug(true)
+            .detect {
+                if (it)
+                    return@detect BlockUserDialog.newInstance("App can't run on Emulators")
+                        .show(supportFragmentManager, BlockUserDialog.TAG)
+            }
         val filter2 = IntentFilter()
         filter2.addAction(AudioManager.ACTION_HDMI_AUDIO_PLUG)
         registerReceiver(eventReceiver, filter2)
-
+        if (Settings.Secure.getInt(contentResolver, Settings.Secure.ADB_ENABLED, 0) == 1) {
+            return BlockUserDialog.newInstance("Please turn off usb debugging\n")
+                .show(supportFragmentManager, BlockUserDialog.TAG)
+        }
+        if (Settings.Secure.getInt(contentResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED , 0) == 1) {
+            return BlockUserDialog.newInstance("Please turn off developer settings\n")
+                .show(supportFragmentManager, BlockUserDialog.TAG)
+        }
         if (isAppInstalled("me.weishu.exp")) {
             return BlockUserDialog.newInstance("Please Remove TaiChi app first\n")
                 .show(supportFragmentManager, BlockUserDialog.TAG)
@@ -397,15 +414,16 @@ open class BaseActivity2 : AppCompatActivity() {
         super.onDestroy()
         //      unregisterReceiver(bluetoothChangeReceiver)
         unregisterReceiver(eventReceiver)
+        dialog = null
     }
 
     class DiscoveryFragment : MediaRouteDiscoveryFragment() {
-        private lateinit var mCallback: MediaRouter.Callback
+        private var mCallback: MediaRouter.Callback? = null
         fun setCallback(cb: MediaRouter.Callback) {
             mCallback = cb
         }
 
-        override fun onCreateCallback(): MediaRouter.Callback {
+        override fun onCreateCallback(): MediaRouter.Callback? {
             return mCallback
         }
 

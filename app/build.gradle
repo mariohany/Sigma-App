@@ -18,8 +18,8 @@ android {
         applicationId "com.smart.sigma.new"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 16
-        versionName "1.16"
+        versionCode 18
+        versionName "1.18"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField 'String', "ENCRYPTION_KEY", "\"EfpkwiMo9H/qJBD4LnA6SPj26ZOwQ4Zz\""
         signingConfig signingConfigs.release
@@ -70,7 +70,6 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation "androidx.datastore:datastore-core:1.0.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
     implementation "com.google.android.material:material:1.4.0"
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -84,6 +83,7 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation 'com.ct7ct7ct7.androidvimeoplayer:library:1.0.6'
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'androidx.work:work-runtime:2.7.1'

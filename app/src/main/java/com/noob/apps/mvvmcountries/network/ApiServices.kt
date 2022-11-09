@@ -81,7 +81,7 @@ interface ApiServices {
         @Header("auth-token") auth: String?,
     ): Call<UserInfoResponse>
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
     @POST("auth/refresh")
     fun updateToken(
         @Header("Authorization") Authorization: String?,
@@ -89,7 +89,7 @@ interface ApiServices {
 //        @Field("refresh_token") refresh_token: String?
     ): Call<LoginResponse>
 
-    @POST("students/changeFirebaseToken")
+    @POST("student/change-firebase-token")
     fun updateFCMToken(
         @Header("Authorization") Authorization: String?,
         @Header("auth-token") auth: String?,

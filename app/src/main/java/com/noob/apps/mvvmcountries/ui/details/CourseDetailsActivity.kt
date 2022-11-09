@@ -75,8 +75,9 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
     private var userId = ""
     private var token = ""
     private var selectedLectureId = ""
-    private var startTime = ""
-    private var endTime = ""
+//    private var startTime = ""
+//    private var endTime = ""
+    private var remaining:Long = 0
     private var sessionTimeout = 0
     private var countDownTimer: CountDownTimer? = null
     private var trackSelector: DefaultTrackSelector? = null
@@ -627,11 +628,12 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
     fun onStartWatchClicked() {
         val watchedLectures = WatchedLectures(lectureResponse.id, 0)
         roomViewModel.addLecture(watchedLectures)
-        startTime = getStartDate()
-        endTime = getStartDate(sessionTimeout)
+//        startTime = getStartDate()
+//        endTime = getStartDate(sessionTimeout)
+        remaining = (sessionTimeout.times(60).times(60).times(1000)).toLong()
 //        releasePlayer()
         initializePlayer()
-        printDifferenceDateForHours(startTime, endTime)
+        printDifferenceDateForHours(remaining)
         createMediaItem(resolutions.firstOrNull()?.link)
         initAddSession(selectedLectureId)
     }
@@ -668,13 +670,13 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
     }
 
     private fun checkVideoSession() {
-        var expired = true
-        startTime = getStartDate()
-        endTime = lectureResponse.studentSessions.lastOrNull()?.expiredAt ?: ""
-        if (endTime.isNotEmpty())
-            expired = isSessionExpired(startTime, endTime)
+//        startTime = getStartDate()
+//        endTime = lectureResponse.studentSessions.lastOrNull()?.remainingSeconds ?: ""
+        remaining = lectureResponse.studentSessions.lastOrNull()?.remainingSeconds?.times(1000) ?: 0L
+        val expired = remaining <= 0
+//            expired = isSessionExpired(startTime, endTime)
         qualityAdapter.setData(resolutions)
-        val lecture = lecturesDB.filter { it.uuid == lectureResponse.id }
+//        val lecture = lecturesDB.filter { it.uuid == lectureResponse.id }
 //        if (lectureResponse.allowedSessions - lectureResponse.actualSessions == 0 &&
 //            expired
 //        ) {
@@ -719,7 +721,7 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
 //                releasePlayer()
                 initializePlayer()
                 clearTimer()
-                printDifferenceDateForHours(startTime, endTime)
+                printDifferenceDateForHours(remaining)
                 createMediaItem(
                     resolutions.firstOrNull()?.link,
                     lectureResponse.studentSessions.lastOrNull()?.videoPosition ?: 0
@@ -823,7 +825,7 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
 
     private fun getStartDate(hours: Int): String {
         val c = Calendar.getInstance(Locale.ENGLISH).time
-        val df = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.getDefault())
+        val df = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH)
         val formattedDate: String = df.format(c)
         val d = df.parse(formattedDate)
         val cal = Calendar.getInstance(Locale.ENGLISH)
@@ -835,7 +837,7 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
 
     private fun getStartDate(): String {
         val c = Calendar.getInstance(Locale.ENGLISH).time
-        val df = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.getDefault())
+        val df = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH)
         val formattedDate: String = df.format(c)
         val d = df.parse(formattedDate)
         val cal = Calendar.getInstance(Locale.ENGLISH)
@@ -844,24 +846,23 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
     }
 
     private fun isSessionExpired(strTime: String, endTime: String): Boolean {
-        val format1 = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.getDefault())
+        val format1 = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH)
         val currentTime = format1.parse(strTime)
         val endDate = format1.parse(endTime)
         val different = endDate.time - currentTime.time
         return different <= 0
     }
 
-    private fun printDifferenceDateForHours(strTime: String, endTime: String) {
-        val format1 = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.getDefault())
-        val currentTime = format1.parse(strTime)
-        val endDate = format1.parse(endTime)
-        val different = endDate.time - currentTime.time
-        countDownTimer = object : CountDownTimer(different, 1000) {
+    private fun printDifferenceDateForHours(remaining:Long) {
+//        val format1 = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH)
+//        val currentTime = format1.parse(strTime)
+//        val endDate = format1.parse(endTime)
+//        val different = endDate.time - currentTime.time
+        countDownTimer = object : CountDownTimer(remaining, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsInMilli: Long = 1000
                 val minutesInMilli = secondsInMilli * 60
                 minutesInMilli * 60
-
             }
 
             override fun onFinish() {
@@ -1037,20 +1038,22 @@ class CourseDetailsActivity : BaseActivity2(), RecyclerViewClickListener,
     }
 
     private fun invalidWatchDialog(title: String) {
+        if(!isFinishing) {
 //        val inflater = LayoutInflater.from(applicationContext)
-        val builder: AlertDialog.Builder = AlertDialog.Builder(
-            this,
-            R.style.CustomDialog
-        )
-        val customLayout = InvalidWatchDialogBinding.inflate(layoutInflater)
-        customLayout.txtTitle.text = title
-        builder.setCancelable(true)
-        builder.setView(customLayout.root)
-        val dialog: AlertDialog = builder.create()
-        customLayout.callButton.setOnClickListener {
-            dialog.dismiss()
+            val builder: AlertDialog.Builder = AlertDialog.Builder(
+                this,
+                R.style.CustomDialog
+            )
+            val customLayout = InvalidWatchDialogBinding.inflate(layoutInflater)
+            customLayout.txtTitle.text = title
+            builder.setCancelable(true)
+            builder.setView(customLayout.root)
+            val dialog: AlertDialog = builder.create()
+            customLayout.callButton.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
         }
-        dialog.show()
     }
 
 

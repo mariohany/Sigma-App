@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/semibold"
             android:textColor="@color/gray_purple"
+            android:lineSpacingExtra="-10dp"
             android:textSize="@dimen/_16ssp" />
 
         <androidx.recyclerview.widget.RecyclerView

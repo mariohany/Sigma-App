@@ -271,11 +271,12 @@ open class BaseActivity : AppCompatActivity() {
 
     protected fun isAppInstalled(uri: String): Boolean {
         val pm = packageManager
-        try {
+        return try {
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
-            return true
-        }catch (e:Exception){}
-        return false
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     class DiscoveryFragment : MediaRouteDiscoveryFragment() {
@@ -317,6 +318,6 @@ open class BaseActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(eventReceiver)
-
+        dialog = null
     }
 }
